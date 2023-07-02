@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Biglietto EFfy</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet" />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous" />
+
+        <style>
+            body {
+                background-color: whitesmoke;
+                height: 100vh;
+            }
+
+            .mycard {
+                position: relative;
+                width: 80%;
+                height: 500px;
+                margin: 0 auto;
+                perspective: 1000px;
+            }
+            .mycard-body {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                transition: transform 1s;
+                transform-style: preserve-3d;
+            }
+            .front,
+            .back {
+                position: absolute;
+                backface-visibility: hidden;
+                width: 100%;
+                height: 100%;
+            }
+            .back {
+                transform: rotateY(180deg);
+            }
+            .mycard-text-container {
+                position: absolute;
+                /* transform: translate(-50%, -50%); */
+                text-align: center;
+
+                font-family: "Kalam", cursive;
+            }
+
+            .front .mycard-text-container {
+                top: 20%;
+                left: 15%;
+            }
+
+            .back .mycard-text-container {
+                top: 20%;
+                left: 23%;
+            }
+
+            .mycard-img {
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Large devices (desktops, 992px and up)*/
+            @media (min-width: 992px) {
+                .mycard {
+                    width: 70%;
+                }
+            }
+
+            /* X-Large devices (large desktops, 1200px and up)*/
+            @media (min-width: 1200px) {
+                .mycard {
+                    width: 65%;
+                }
+            }
+
+            @keyframes typing {
+                0% {
+                    width: 0;
+                    border-right: 2px solid;
+                }
+                100% {
+                    width: 100%;
+                    border-color: transparent;
+                    border-right: 2px solid;
+                }
+            }
+
+            .message {
+                overflow: hidden;
+                white-space: nowrap;
+                animation: typing 4s steps(40, end);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="modal fade" id="riddle" tabindex="-1" aria-labelledby="riddle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Da parte di Alpha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="font-monospace">
+                            PPoooooooopiiiiiiiii
+                            <br />
+                            PPooooooooooppiiipooooooopiiiiiiiiiiiipooooooooopippoppiii
+                            <br />
+                            Poopiiiiippoopiiiii!
+                        </p>
+                        <p class="text-center mb-0">Attenta! Non è quello che sembra!</p>
+                        <p class="fst-italic text-secondary-emphasis text-end m-0">
+                            Chiedere ad Alpha per dei suggerimenti
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-12 align-self-center">
+                    <div class="mycard">
+                        <div class="mycard-body">
+                            <div class="front" id="front">
+                                <img class="mycard-img rounded" src="front.jpg" />
+                                <div class="mycard-text-container">
+                                    <h1>Con tanto affetto i tuoi clownz</h1>
+                                </div>
+                            </div>
+                            <div class="back" id="back">
+                                <img class="mycard-img rounded" src="back.jpg" />
+                                <div class="mycard-text-container">
+                                    <h1 class="m-0">Buon compleanno infernale</h1>
+                                    <span class="text-secondary-emphasis">
+                                        Buono valido per il riscatto di
+                                        <span class="text-danger">Diablo IV</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-4 offset-3 text-end">
+                        <span class="fst-italic text-secondary-emphasis">Tap to flip</span>
+                    </div>
+                </div>
+                <div class="col-6 offset-3">
+                    <div class="writers">
+                        <p class="message">
+                            Da parte di
+                            <span class="text-info" style="cursor: pointer" id="alpha-name">Alpha</span>, Honey, Khalo,
+                            Tracciolino, Shevanelss
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+        <script>
+            window.onload = () => {
+                var flip = false;
+                // document.querySelector("#front > .mycard-img").src = base64img;
+                // document.querySelector("#back > .mycard-img").src = base64img;
+
+                var modal = new bootstrap.Modal("#riddle");
+
+                document.querySelector("#alpha-name").addEventListener("click", () => {
+                    modal.show();
+                });
+
+                document.querySelector(".mycard").addEventListener("mousedown", function () {
+                    if (!flip) {
+                        document.querySelector(".mycard-body").style.transform = "rotateY(180deg)";
+                    } else {
+                        document.querySelector(".mycard-body").style.transform = "rotateY(0deg)";
+                    }
+                    flip = !flip;
+                });
+            };
+        </script>
+    </body>
+</html>
