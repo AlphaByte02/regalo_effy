@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="icon" type="image/png" href="imgs/favicon.png"/>
+        <link rel="icon" type="image/png" href="imgs/favicon.png" />
 
         <title>Biglietto Effy ❤</title>
 
@@ -46,31 +46,65 @@
                 backface-visibility: hidden;
                 width: 100%;
                 height: 100%;
+
+                overflow: hidden;
+                object-position: center center;
             }
             .back {
                 transform: rotateY(180deg);
             }
+
             .mycard-text-container {
                 position: absolute;
-                /* transform: translate(-50%, -50%); */
-                text-align: center;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-color: transparent;
+                opacity: 1;
+                z-index: 1;
 
                 font-family: "Kalam", cursive;
-            }
-
-            .front .mycard-text-container {
-                top: 20%;
-                left: 15%;
-            }
-
-            .back .mycard-text-container {
-                top: 20%;
-                left: 23%;
             }
 
             .mycard-img {
                 width: 100%;
                 height: 100%;
+            }
+
+            .text {
+                position: relative;
+                top: 20%;
+            }
+
+            /* Small devices (landscape phones, 375px)*/
+            @media (max-width: 375px) {
+                .front .text {
+                    padding-right: 0.15rem !important;
+                    padding-left: 0.15rem !important;
+                }
+
+                .back .text {
+                    top: 12.5%;
+                }
+            }
+
+            /* Small devices (landscape phones, 425px)*/
+            @media (max-width: 425px) {
+                .back .text {
+                    top: 12.5%;
+                }
+            }
+
+            /* Small devices (landscape phones, 576px and up)*/
+            @media (min-width: 576px) {
+                .back .text {
+                    top: 15%;
+                }
+            }
+
+            /* Medium devices (tablets, 768px and up)*/
+            @media (min-width: 768px) {
             }
 
             /* Large devices (desktops, 992px and up)*/
@@ -91,17 +125,21 @@
                 0% {
                     width: 0;
                     border-right: 2px solid;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                90% {
+                    white-space: nowrap;
                 }
                 100% {
                     width: 100%;
                     border-color: transparent;
                     border-right: 2px solid;
+                    overflow: hidden;
                 }
             }
 
             .message {
-                overflow: hidden;
-                white-space: nowrap;
                 animation: typing 4s steps(40, end);
             }
         </style>
@@ -118,12 +156,12 @@
                         <p class="font-monospace">
                             PPoooooooopiiiiiiiii
                             <br />
-                            PPooooooooooppiiipooooooopiiiiiiiiiiiipooooooooopippoppiii
+                            PPooooooooooppiiipooooooo<wbr />piiiiiiiiiiiipooooooooopippoppiii
                             <br />
                             Poopiiiiippoopiiiii!
                         </p>
                         <p class="text-center mb-0">Attenta! Non è quello che sembra!</p>
-                        <p class="fst-italic text-secondary-emphasis text-end m-0">
+                        <p class="fst-italic m-0 text-center text-lg-end text-secondary-emphasis">
                             Chiedere ad Alpha per dei suggerimenti
                         </p>
                     </div>
@@ -138,17 +176,19 @@
                             <div class="front" id="front">
                                 <img class="mycard-img rounded" src="imgs/front.jpg" />
                                 <div class="mycard-text-container">
-                                    <h1>Con tanto affetto i tuoi clownz</h1>
+                                    <span class="h1 d-block text">Con tanto affetto i tuoi clownz</span>
                                 </div>
                             </div>
                             <div class="back" id="back">
                                 <img class="mycard-img rounded" src="imgs/back.jpg" />
                                 <div class="mycard-text-container">
-                                    <h1 class="m-0">Buon compleanno infernale</h1>
-                                    <span class="text-secondary-emphasis">
-                                        Buono valido per il riscatto di
-                                        <span class="text-danger">Diablo IV</span>
-                                    </span>
+                                    <div class="text">
+                                        <span class="h1 m-0 d-block">Buon compleanno infernale</span>
+                                        <span class="text-secondary-emphasis d-block">
+                                            Buono valido per il riscatto di
+                                            <span class="text-danger">Diablo IV</span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +197,7 @@
                         <span class="fst-italic text-secondary-emphasis">Tap to flip</span>
                     </div>
                 </div>
-                <div class="col-6 offset-3">
+                <div class="col-6 col-lg-8 offset-3 offset-lg-2">
                     <div class="writers">
                         <p class="message">
                             Da parte di
@@ -175,8 +215,6 @@
         <script>
             window.onload = () => {
                 var flip = false;
-                // document.querySelector("#front > .mycard-img").src = base64img;
-                // document.querySelector("#back > .mycard-img").src = base64img;
 
                 var modal = new bootstrap.Modal("#riddle");
 
